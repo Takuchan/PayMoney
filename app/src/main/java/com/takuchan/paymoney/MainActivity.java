@@ -63,8 +63,8 @@ public class MainActivity extends AppCompatActivity{
                 if(itemname.equals("この機能はなんですか")){
                     new AlertDialog.Builder(MainActivity.this)
                             .setTitle("この機能はなんですか")
-                            .setMessage("例えば、3人で2000¥の商品を割り勘するとします。\n2000÷3=666・・66...\nあまりが出てしまいました。\n\n" +
-                                    "この場合に「10¥まで」を選ぶと\n1の位は四捨五入され、一人あたりの支払価格は670¥となります。\nこれにより１円玉を出し合う必要がなくなります。\n上の例はおつりが帰ってくる計算です。ですがおつりが帰らず、逆に多く支払う" +
+                            .setMessage("例えば、3人で¥2000の商品を割り勘するとします。\n2000÷3=666・・66...\nあまりが出てしまいました。\n\n" +
+                                    "この場合に「¥10まで」を選ぶと\n1の位は四捨五入され、一人あたりの支払価格は¥670となります。\nこれにより１円玉を出し合う必要がなくなります。\n上の例はおつりが帰ってくる計算です。ですがおつりが帰らず、逆に多く支払う" +
                                     "場合もあります。例えば１の位が3で四捨五入して０になる場合です。この場合では一人だけが多く支払うことになるので、平等を保つために友達間や仲間で順番に交代して支払っていくことが大切です。金銭のやり取りなのでしっかりと話し合いで約束を決めましょう。")
                             .setPositiveButton("OK", null)
                             .show();
@@ -130,25 +130,24 @@ public class MainActivity extends AppCompatActivity{
                     .setView(pulldownimage)
                     .setPositiveButton("OK",null)
                     .show();
-        }else if(itemname.equals("10¥まで")){
+        }else if(itemname.equals("¥10まで")){
             int  answer = num/peopleint / 10 * 10;
             if((num/peopleint % 10) > 5) {
                 answer = answer + 10;
             }
-            onepay.setText(answer + "¥");
+            onepay.setText("¥" + answer);
             extra.setVisibility(View.VISIBLE);
             int otsuri = num - answer * peopleint;
             if (otsuri < 0){
-                extra.setText("おつり"+otsuri +  "¥");
+                extra.setText("おつり¥"+otsuri );
             }else{
-                extra.setText("一人だけ+" + otsuri+"¥を払ってください");
+                extra.setText("一人だけ+¥" + otsuri+"を払ってください");
             }
 
         }else if(itemname.equals("均等に割る")){
-            onepay.setText(num / peopleint + "¥");
+            onepay.setText("¥"+num / peopleint );
             extra.setVisibility(View.VISIBLE);
-            extra.setText("あまりは"+num%peopleint+"¥");
-            Toast.makeText(this, "計算が終わりました", Toast.LENGTH_SHORT).show();
+            extra.setText("あまりは¥"+num%peopleint);
         }
     }
 

@@ -81,11 +81,14 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 if(price.getText().toString().length() != 0){
-                    adapter.add(price.getText().toString());
-                    totalprice[i] = Integer.parseInt(price.getText().toString());
-                    i = i + 1;
-                    ok = 1;
+                    if (!price.getText().toString().equals("0")) {
+                        adapter.add(price.getText().toString());
+                        totalprice[i] = Integer.parseInt(price.getText().toString());
+                        i = i + 1;
+                        ok = 1;
+                    }
                     price.setText(null);
+
 
                 }else{
                     Toast.makeText(MainActivity.this, "料金を入力してね", Toast.LENGTH_SHORT).show();
@@ -130,24 +133,24 @@ public class MainActivity extends AppCompatActivity{
                     .setView(pulldownimage)
                     .setPositiveButton("OK",null)
                     .show();
-        }else if(itemname.equals("¥10まで")){
+        }else if(itemname.equals("10¥まで")){
             int  answer = num/peopleint / 10 * 10;
             if((num/peopleint % 10) > 5) {
                 answer = answer + 10;
             }
-            onepay.setText("¥" + answer);
+            onepay.setText( answer + "¥");
             extra.setVisibility(View.VISIBLE);
             int otsuri = num - answer * peopleint;
             if (otsuri < 0){
-                extra.setText("おつり¥"+otsuri );
+                extra.setText("おつり"+otsuri*(-1)+"¥" );
             }else{
-                extra.setText("一人だけ+¥" + otsuri+"を払ってください");
+                extra.setText("一人だけ+" + otsuri+"¥を払ってください");
             }
 
         }else if(itemname.equals("均等に割る")){
-            onepay.setText("¥"+num / peopleint );
+            onepay.setText(num / peopleint +"¥" );
             extra.setVisibility(View.VISIBLE);
-            extra.setText("あまりは¥"+num%peopleint);
+            extra.setText("あまりは"+num%peopleint +"¥");
         }
     }
 
